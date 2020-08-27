@@ -201,4 +201,3 @@ printPoint(iHaveXYZ)
 // Argument of type '{ x: string; y: string; }' is not assignable to parameter of type 'Point'.
 //   Types of property 'x' are incompatible.
 //     Type 'string' is not assignable to type 'number'.ts(2345)
-
