@@ -52,3 +52,16 @@ let a: number[] = [1, 2, 3, 4]
 let ro: ReadonlyArray<number> = a
 
 a = ro as number[]
+
+interface SquareConfig {
+  color?: string;
+  width?: number;
+  [propName: string]: any
+}
+
+function createSquare2(config: SquareConfig): { color: string; area: number } {
+  return { color: config.color || 'red', area: config.width || 20 }
+}
+
+let squareOptions = { colour: 'red' }
+let mySquare3 = createSquare(squareOptions)
