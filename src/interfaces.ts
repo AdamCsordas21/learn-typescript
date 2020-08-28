@@ -41,3 +41,14 @@ function createSquare(config: SquareConfig): { colour: string; area: number } {
 }
 
 let mySquare = createSquare({ colour: 'black' })
+
+interface Point1 {
+  readonly x: number;
+  readonly y: number;
+}
+
+let p1: Point = { x: 10, y: 20 }
+let a: number[] = [1, 2, 3, 4]
+let ro: ReadonlyArray<number> = a
+
+a = ro as number[]
