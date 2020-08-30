@@ -65,3 +65,28 @@ function createSquare2(config: SquareConfig): { color: string; area: number } {
 
 let squareOptions = { colour: 'red' }
 let mySquare3 = createSquare(squareOptions)
+
+interface SearchFunc {
+  (source: string, subString:string): boolean
+}
+
+let mySearch: SearchFunc
+
+mySearch = function (source: string, subString: string) {
+  let result = source.search(subString)
+  return result > -1
+}
+
+let mySearch2: SearchFunc
+
+mySearch = function (src: string, sub: string): boolean {
+  let result = src.search(sub)
+  return result > -1
+}
+
+let mySearch3: SearchFunc
+
+mySearch = function (src, sub) {
+  let result = src.search(sub)
+  return result > - 1
+}
