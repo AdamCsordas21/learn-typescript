@@ -47,7 +47,7 @@ interface Point1 {
   readonly y: number;
 }
 
-let p1: Point = { x: 10, y: 20 }
+let p1: Point1 = { x: 10, y: 20 }
 let a: number[] = [1, 2, 3, 4]
 let ro: ReadonlyArray<number> = a
 

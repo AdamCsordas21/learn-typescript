@@ -129,31 +129,31 @@ let pickedCard2 = cardPicker()
 alert('card: ' + pickedCard2.card + ' of ' + pickedCard2.suit)
 
 // this parameters in callbacks
-interface Event {
+interface MyEvent {
   message: string
 }
 
 interface UIElement {
-  addClickListener(onClick: (this: void, e: Event) => void): void
+  addClickListener(onClick: (this: void, e: MyEvent) => void): void
 }
 declare const uiElement: UIElement
 
 class Handler {
   info: string
-  onClickBad(this: Handler, e: Event) {
+  onClickBad(this: Handler, e: MyEvent) {
     this.info = e.message
   }
 }
 
 let h = new Handler()
 // uiElement.addClickListener(h.onClickBad)
-// Argument of type '(this: Handler, e: Event) => void' is not assignable to parameter of type '(this: void, e: Event) => void'.
+// Argument of type '(this: Handler, e: MyEvent) => void' is not assignable to parameter of type '(this: void, e: Event) => void'.
 //   The 'this' types of each signature are incompatible.
 //     Type 'void' is not assignable to type 'Handler'.ts(2345)
 
 class GoodHandler {
   info: string
-  onClickGood(this: void, e: Event) {
+  onClickGood(this: void, e: MyEvent) {
     console.log(e.message)
     // this.info = e.message
     // Property 'info' does not exist on type 'void'.ts(2339)
@@ -165,7 +165,7 @@ uiElement.addClickListener(h2.onClickGood)
 
 class BestHandler {
   info: string
-  onClickBest = (e: Event) => {
+  onClickBest = (e: MyEvent) => {
     this.info = e.message
   }
 }
