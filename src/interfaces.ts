@@ -235,3 +235,5 @@ console.log(imageCtrl.pub2)
 // Property 'prot' is protected and only accessible within class 'Control' and its subclasses.ts(2445)
 // console.log(imageCtrl.state)
 // Property 'state' is private and only accessible within class 'Control'.ts(2341)
+
+export {}

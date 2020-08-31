@@ -86,3 +86,5 @@ const strValue: string = someValue as string
 let strLength2: number = strValue.length
 
 const otherAssertion: string = <string>someValue
+
+export {}

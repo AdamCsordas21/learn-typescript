@@ -13,3 +13,5 @@ function sayHi(person: Person): void {
 }
 
 sayHi(adam)
+
+export {}

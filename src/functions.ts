@@ -129,31 +129,31 @@ let pickedCard2 = cardPicker()
 alert('card: ' + pickedCard2.card + ' of ' + pickedCard2.suit)
 
 // this parameters in callbacks
-interface MyEvent {
+interface Event {
   message: string
 }
 
 interface UIElement {
-  addClickListener(onClick: (this: void, e: MyEvent) => void): void
+  addClickListener(onClick: (this: void, e: Event) => void): void
 }
 declare const uiElement: UIElement
 
 class Handler {
   info: string
-  onClickBad(this: Handler, e: MyEvent) {
+  onClickBad(this: Handler, e: Event) {
     this.info = e.message
   }
 }
 
 let h = new Handler()
 // uiElement.addClickListener(h.onClickBad)
-// Argument of type '(this: Handler, e: MyEvent) => void' is not assignable to parameter of type '(this: void, e: Event) => void'.
+// Argument of type '(this: Handler, e: Event) => void' is not assignable to parameter of type '(this: void, e: Event) => void'.
 //   The 'this' types of each signature are incompatible.
 //     Type 'void' is not assignable to type 'Handler'.ts(2345)
 
 class GoodHandler {
   info: string
-  onClickGood(this: void, e: MyEvent) {
+  onClickGood(this: void, e: Event) {
     console.log(e.message)
     // this.info = e.message
     // Property 'info' does not exist on type 'void'.ts(2339)
@@ -165,7 +165,7 @@ uiElement.addClickListener(h2.onClickGood)
 
 class BestHandler {
   info: string
-  onClickBest = (e: MyEvent) => {
+  onClickBest = (e: Event) => {
     this.info = e.message
   }
 }
@@ -241,3 +241,5 @@ const objects: object = add3({ "1": 1 }, { "2": "2" })
 //   The last overload gave the following error.
 //     Argument of type 'true' is not assignable to parameter of type 'object'.ts(2769)
 // functions.ts(214, 10): The last overload is declared here.
+
+export {}
