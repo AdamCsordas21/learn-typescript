@@ -67,7 +67,7 @@ let squareOptions = { colour: 'red' }
 let mySquare3 = createSquare(squareOptions)
 
 interface SearchFunc {
-  (source: string, subString:string): boolean
+  (source: string, subString: string): boolean
 }
 
 let mySearch: SearchFunc
@@ -77,14 +77,10 @@ mySearch = function (source: string, subString: string) {
   return result > -1
 }
 
-let mySearch2: SearchFunc
-
 mySearch = function (src: string, sub: string): boolean {
   let result = src.search(sub)
   return result > -1
 }
-
-let mySearch3: SearchFunc
 
 mySearch = function (src, sub) {
   let result = src.search(sub)
@@ -121,7 +117,7 @@ interface ReadOnlyStringArray {
 let myArray2: ReadOnlyStringArray = ['Alice', 'Bob']
 
 interface ClockConstructor {
-  new (hour: number, minute: number): ClockInterface
+  new(hour: number, minute: number): ClockInterface
 }
 
 interface ClockInterface {
@@ -137,14 +133,14 @@ function createClock(
 }
 
 class DigitalClock implements ClockInterface {
-  constructor(h: number, m: number) {}
+  constructor(h: number, m: number) { }
   tick() {
     console.log('beep beep')
   }
 }
 
 class AnalogClock implements ClockInterface {
-  constructor(h: number, m: number) {}
+  constructor(h: number, m: number) { }
   tick() {
     console.log('tick tock')
   }
@@ -189,9 +185,9 @@ interface Counter {
 }
 
 function getCounter(): Counter {
-  let counter = function (start: number) {} as Counter
+  let counter = function (start: number) { } as Counter
   counter.interval = 123
-  counter.reset = function () {}
+  counter.reset = function () { }
   return counter
 }
 
@@ -202,6 +198,12 @@ d.interval = 5.0
 
 class Control {
   private state: any
+  protected prot: any
+  public pub: any
+  pub2: any
+  getState() {
+    return this.state
+  }
 }
 
 interface SelectableControl extends Control {
@@ -209,14 +211,27 @@ interface SelectableControl extends Control {
 }
 
 class Button extends Control implements SelectableControl {
-  select() {}
+  select() { }
 }
 
 class TextBox extends Control {
-  select() {}
+  select() { }
 }
 
-// class ImageControl extends Control implements SelectableControl {
-//   private state: any
-//   select() {}
-// }
+class ImageControl extends Control implements SelectableControl {
+  select() {
+    console.log(this.pub)
+    console.log(this.pub2)
+    console.log(this.prot)
+    // console.log(this.state)
+    // Property 'state' is private and only accessible within class 'Control'.ts(2341)
+   }
+}
+
+const imageCtrl = new ImageControl()
+console.log(imageCtrl.pub)
+console.log(imageCtrl.pub2)
+// console.log(imageCtrl.prot)
+// Property 'prot' is protected and only accessible within class 'Control' and its subclasses.ts(2445)
+// console.log(imageCtrl.state)
+// Property 'state' is private and only accessible within class 'Control'.ts(2341)
