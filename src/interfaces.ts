@@ -177,7 +177,25 @@ interface Square extends Shape, PenStroke {
   sideLenght: number
 }
 
-let square = {} as Square
+let square2 = {} as Square
 square.color = 'blue'
 square.sideLenght = 10
 square.penWidth = 5.0
+
+interface Counter {
+  (start: number): string
+  interval: number
+  reset(): void
+}
+
+function getCounter(): Counter {
+  let counter = function (start: number) {} as Counter
+  counter.interval = 123
+  counter.reset = function () {}
+  return counter
+}
+
+let d = getCounter()
+d(10)
+d.reset()
+d.interval = 5.0
