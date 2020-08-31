@@ -152,3 +152,32 @@ class AnalogClock implements ClockInterface {
 
 let digital = createClock(DigitalClock, 12, 17)
 let analog = createClock(AnalogClock, 7, 32)
+
+interface Shape {
+  color: string
+}
+
+interface Square extends Shape {
+  sideLength: number
+}
+
+let square = {} as Square
+square.color = 'blue'
+square.sideLength = 10
+
+interface Shape {
+  color: string
+}
+
+interface PenStroke {
+  penWidth: number
+}
+
+interface Square extends Shape, PenStroke {
+  sideLenght: number
+}
+
+let square = {} as Square
+square.color = 'blue'
+square.sideLenght = 10
+square.penWidth = 5.0
