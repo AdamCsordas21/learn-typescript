@@ -114,9 +114,9 @@ let deck2: Deck = {
   createCardPicker: function (this: Deck) {
     return () => {
       let pickedCard = Math.floor(Math.random() * 52)
-      let pickedSuit = Math.floor(pickedCard / 13)
+      let pickedSuit2 = Math.floor(pickedCard / 13)
       
-      return { suit: this.suits[pickedSuit], card: pickedCard % 13 }
+      return { suit: this.suits[pickedSuit2], card: pickedCard % 13 }
     }
   }
 }
@@ -125,3 +125,32 @@ let cardPicker2 = deck.createCardPicker()
 let pickedCard2 = cardPicker()
 
 alert('card: ' + pickedCard2.card + ' of ' + pickedCard2.suit)
+
+// this parameters in callbacks
+
+let suits = ['hearts', 'spades', 'clubs', 'diamonds']
+
+function pickedCard3(x: { suit: string, card: number }[]): number
+function pickedCard3(x: number): { suit: string, card: number }
+function pickedCard3(x: any): any {
+  if (typeof x == 'object') {
+    let pickedCard4 = Math.floor(Math.random() * x.length)
+    return pickedCard4
+  }
+  else if (typeof x == 'number') {
+    let pickedSuit3 = Math.floor(x / 13)
+    return { suit: suits[pickedSuit3], card: x % 13 }
+  }
+}
+
+let myDeck2 = [
+  { suit: 'diamonds', card: 2 },
+  { suit: 'spades', card: 10 },
+  { suit: 'hearts', card: 4 }
+]
+
+let pickedCard4 = myDeck2[pickedCard3(myDeck2)]
+alert('card: ' + pickedCard4 + ' of ' + pickedCard4.suit)
+
+let pickedCard5 = pickedCard3(15)
+alert('card: ' + pickedCard5.card + ' of ' + pickedCard5.suit)
