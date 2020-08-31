@@ -90,3 +90,32 @@ mySearch = function (src, sub) {
   let result = src.search(sub)
   return result > - 1
 }
+
+interface StringArray {
+  [index: number]: string
+}
+
+let myArray: StringArray
+myArray = ['Bob', 'Fred']
+
+let myStr: string = myArray[0]
+
+interface Animal {
+  name: string
+}
+
+interface Dog extends Animal {
+  breed: string
+}
+
+interface NumberOrStringDictionary {
+  [index: string]: number | string
+  length: number
+  name: string
+}
+
+interface ReadOnlyStringArray {
+  readonly [index: number]: string
+}
+
+let myArray2: ReadOnlyStringArray = ['Alice', 'Bib']
