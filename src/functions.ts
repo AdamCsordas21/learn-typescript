@@ -64,3 +64,15 @@ function buildName4(firstName = 'Adam', lastName: string) {
 // let result9 = buildName4('Adam', 'Csordas', 'Mr') --> Expected 2 arguments, but got 3.
 let result10 = buildName4('Adam', 'Csordas')
 let result11 = buildName4(undefined, 'Csordas')
+
+function buildName5(firstName: string, ...restOfName: string[]) {
+  return firstName + ' '+ restOfName.join(' ')
+}
+
+let employeeName = buildName5('Mr', 'Adam', 'Csordas')
+
+function buildName6(firstName: string, ...restOfName: string[]) {
+  return firstName + ' ' + restOfName.join(' ')
+}
+
+let buildNameFun: (fname: string, ...rest:string[]) => string
