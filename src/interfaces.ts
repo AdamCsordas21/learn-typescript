@@ -1,3 +1,4 @@
+// Our first Interface
 function printLabel(labeledObj: { label: string }) {
   console.log(labeledObj.label)
 }
@@ -14,7 +15,7 @@ function printLabel1(labeledObj: LabeledValue) {
 let myObj1 = { label: 'Size 10 Object', size: 10 }
 printLabel(myObj1)
 
-
+// Optional Properties
 interface SquareConfig {
   colour?: string
   width?: number
@@ -42,6 +43,7 @@ function createSquare(config: SquareConfig): { colour: string; area: number } {
 
 let mySquare = createSquare({ colour: 'black' })
 
+// Readonly Properties
 interface Point1 {
   readonly x: number;
   readonly y: number;
@@ -53,6 +55,7 @@ let ro: ReadonlyArray<number> = a
 
 a = ro as number[]
 
+// Excess Property Checks
 interface SquareConfig {
   color?: string;
   width?: number;
@@ -70,6 +73,7 @@ interface SearchFunc {
   (source: string, subString: string): boolean
 }
 
+// Function Types
 let mySearch: SearchFunc
 
 mySearch = function (source: string, subString: string) {
@@ -87,6 +91,7 @@ mySearch = function (src, sub) {
   return result > - 1
 }
 
+// Indexable Types
 interface StringArray {
   [index: number]: string
 }
@@ -116,6 +121,7 @@ interface ReadOnlyStringArray {
 
 let myArray2: ReadOnlyStringArray = ['Alice', 'Bob']
 
+// Class Types - Implementing An Interface
 interface ClockConstructor {
   new(hour: number, minute: number): ClockInterface
 }
@@ -149,6 +155,7 @@ class AnalogClock implements ClockInterface {
 let digital = createClock(DigitalClock, 12, 17)
 let analog = createClock(AnalogClock, 7, 32)
 
+// Extending Interfaces
 interface Shape {
   color: string
 }
@@ -178,6 +185,7 @@ square.color = 'blue'
 square.sideLenght = 10
 square.penWidth = 5.0
 
+// Hybrid Types
 interface Counter {
   (start: number): string
   interval: number
@@ -196,6 +204,7 @@ d(10)
 d.reset()
 d.interval = 5.0
 
+// InterFaces Extending Classes
 class Control {
   private state: any
   protected prot: any
