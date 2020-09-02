@@ -1,8 +1,12 @@
+// Boolean
 let isDone: boolean = false
+
+// Number
 let decimal: number = 6
 let octal: number = 0o744
 // let bigInt: bigint = 100n // requires target ES2020
 
+// String
 let colour: string = "blue"
 colour = "red"
 
@@ -10,8 +14,11 @@ const name1: string = 'osh'
 const age1: number = 37
 const sentence: string = `Hello, my name is ${name1} and I'm ${age1} y/o`
 
+// Array
 let list: number[] = [1, 2, 3]
 let list1: Array<number> = [5, 6, 7]
+
+// Tuple
 let favThings: (number | string)[] = [1, 2, 3, 'pizza']
 let favThings1: Array<number | string> = [1, 2, 3, 'pizza']
 
@@ -21,7 +28,7 @@ let nameAge: [string, number] = ['osh', 23]
 type NameAgeTuple = [string, number]
 let nameAge1: NameAgeTuple = ['adam', 22]
 
-// Right before enumuration declaration
+// Enum - Right before enumuration declaration
 enum Colour {
   Red,
   Green,
@@ -47,6 +54,7 @@ enum ErrorMessage {
 }
 const pageError: ErrorMessage = ErrorMessage.NoAccess
 
+// Unknown
 declare const maybe: unknown // this is provided by something, but we don't know the value (yet!)
 
 // 'maybe' could be a string, object, boolean, undefined, or other types
@@ -72,14 +80,17 @@ if (typeof maybe === "string") {
   // Type 'string' is not assignable to type 'boolean'.
 }
 
+// Any
 declare function getValue(key: string): any;
 // OK, return value of 'getValue' is not checked
 const str: string = getValue("myString");
 
+// Void
 function add(n1: number, n2: number): void {
   console.log('the sum is: ', n1 + n2)
 }
 
+// Type assertions
 let someValue: unknown = 'a string'
 let strLength: number = (someValue as string).length
 const strValue: string = someValue as string
