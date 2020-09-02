@@ -1,11 +1,14 @@
+// Functions
 function add2(x: number, y: number): number {
   return x + y
 }
 
+// Function Types - Typing The Function
 let myAdd = function (x: number, y: number): number {
   return x + y
 }
 
+// Writing The Function Type
 let myAdd2: (x: number, y: number) => number = function (
   x: number,
   y: number
@@ -20,7 +23,7 @@ let myAdd3: (baseValue: number, increment: number) => number = function (
   return osh + adam
 }
 
-// The parameters 'x' and 'y' have the type number
+// Inferring The Types - The parameters 'x' and 'y' have the type number
 let myAdd4 = function (x: number, y: number): number {
   return x + y
 }
@@ -30,6 +33,7 @@ let myAdd5: (baseValue: number, increment: number) => number = function (x, y) {
   return x + y
 }
 
+// Optional And Default Parameters
 function buildName(firstName: string, lastName: string) {
   return firstName + ' ' + lastName
 }
@@ -65,6 +69,7 @@ function buildName4(firstName = 'Adam', lastName: string) {
 let result10 = buildName4('Adam', 'Csordas')
 let result11 = buildName4(undefined, 'Csordas')
 
+// Rest Parameters
 function buildName5(firstName: string, ...restOfName: string[]) {
   return firstName + ' ' + restOfName.join(' ')
 }
@@ -79,6 +84,7 @@ employeeName = buildName6('Mr', 'Adam', 'Csordas')
 
 let buildNameFunc: (fname: string, ...rest: string[]) => string
 
+// this And Arrow Functions
 let deck = {
   suits: ['hearts', 'spades', 'clubs', 'diamonds'],
   cards: Array(52),
@@ -97,6 +103,7 @@ let pickedCard = cardPicker()
 
 alert('card: ' + pickedCard.card + ' of ' + pickedCard.suit)
 
+// this Parameters
 function f(this: void) { }
 
 interface Card {
