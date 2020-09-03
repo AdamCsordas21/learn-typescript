@@ -333,4 +333,16 @@ greeterMaker.standardGreeting = 'Hey there!'
 let greeter4: Greeter2 = new greeterMaker()
 console.log(greeter4.greet) // Hey there!
 
+// Using a Class as an Interface
+class Point {
+  x: number
+  y: number
+}
+
+interface Pointed extends Point {
+  z: number
+}
+
+let pointed: Pointed = { x: 1, y: 2, z:3 }
+
 export { }
