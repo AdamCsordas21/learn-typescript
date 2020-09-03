@@ -20,4 +20,20 @@ function padLeft2(value: string, padding: string | number) {
   // ...
 }
 
+// Unions With Common Fields
+interface Bird {
+  fly(): void
+  layEggs(): void
+}
+
+interface Fish {
+  swim(): void
+  layEggs(): void
+}
+
+declare function getSmallPet(): Fish | Bird
+
+let pet = getSmallPet()
+pet.layEggs()
+
 export { }
