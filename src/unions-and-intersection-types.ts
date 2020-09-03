@@ -59,7 +59,7 @@ type NetworkState =
   | NetworkLoadingState
   | NetworkFailedState
   | NetworkSuccesState
-  
+
 function NetworkState(state: NetworkState): string {
   switch (state.state) {
     case 'loading':
@@ -68,6 +68,30 @@ function NetworkState(state: NetworkState): string {
       return `Error ${state.code} downloading`
     case 'success':
       return `Downloaded ${state.response.title} - ${state.response.summary}`
+  }
+}
+
+// Union Exhaustiveness checking
+type NetworkFromCachedState = {
+  state: 'from_cache'
+  id: string
+  response: NetworkSuccesState['response']
+}
+
+type NetworkState2 =
+  | NetworkLoadingState
+  | NetworkFailedState
+  | NetworkSuccesState
+  | NetworkFromCachedState
+
+function logger(s: NetworkState2) {
+  switch (s.state) {
+    case 'loading':
+      return 'loading request'
+    case 'failed':
+      return `failed with ${s.code}`
+    case 'success':
+      return 'got response'
   }
 }
 
