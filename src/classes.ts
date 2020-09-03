@@ -7,7 +7,7 @@ class Greeter {
   }
 
   greet() {
-    return 'Hello, ' + this.greeting
+    return `Hello, ${this.greeting}`
   }
 }
 
@@ -82,7 +82,6 @@ class Animal3 {
 }
 
 // ECMAScript Private Fields
-/*
 class Animal4 {
   #name: string
   constructor(theName: string) {
@@ -90,13 +89,11 @@ class Animal4 {
   }
 }
 
-new Animal ('Cat').#name
-*/
+// new Animal4('Cat').#name
 // Property '#name' is not accessible outside
 // class 'Animal' because it has a private identifier.
 
 // Understanding TypeScript's Private
-/*
 class Animal5 {
   private name: string
   
@@ -105,9 +102,9 @@ class Animal5 {
   }
 }
 
-new Animal().name
-*/
-// Property 'name' does not exist on type 'Animal'.
+// new Animal5('Popek').name
+// Property 'name' is private and only accessible within class 'Animal5'.ts(2341)
+
 class Animal6 {
   private name: string
   constructor(theName: string) {
@@ -225,9 +222,8 @@ if (player.fullName) {
   console.log(player.fullName)
 }
 
-const fullNameMaxLength = 10
-
 class Player2 {
+  private static fullNameMaxLength = 10
   private _fullName: string
 
   get fullName(): string {
@@ -235,8 +231,8 @@ class Player2 {
   }
 
   set fullName(newName: string) {
-    if (newName && newName.length > fullNameMaxLength) {
-      throw new Error('fullName has a max length of ' + fullNameMaxLength)
+    if (newName && newName.length > Player2.fullNameMaxLength) {
+      throw new Error('fullName has a max length of ' + Player2.fullNameMaxLength)
     }
 
     this._fullName = newName
@@ -278,36 +274,36 @@ abstract class Animal7 {
   }
 }
 
-abstract class Deparment {
+abstract class Department {
   constructor(public name: string) { }
 
   printName(): void {
-    console.log(`Deparment name: ${this.name}`)
+    console.log(`Department name: ${this.name}`)
   }
 
   abstract printMeeting(): void  // must be implemented in derived classes
 }
 
-class AccountingDepartment extends Deparment {
+class AccountingDepartment extends Department {
   constructor() {
     super('Accounting and Auditing') // constructor in derived classes must call super()
   }
 
   printMeeting(): void {
-    console.log('The Accounting Deparment meets each Monday at 10am.')
+    console.log('The Accounting Department meets each Monday at 10am.')
   }
 
-  generateReport(): void {
+  generateReports(): void {
     console.log('Generating accounting reports...')
   }
 }
 
-let department: Deparment // ok to create a referencet o an abstract type
-// deparment = new Deparment --> error: cannot create an instance of an abstract class
-department = new AccountingDepartment() // okk to create and assign a non-abstract subclass
+let department // ok to create a referencet of an abstract type
+// deparment = new Deparment() --> error: cannot create an instance of an abstract class
+department = new AccountingDepartment() // ok to create and assign a non-abstract subclass
 department.printName()
 department.printMeeting()
-// department.generateReports() --> Porperty 'generateReports' does not exist on the type 'Deparment'
+// department.generateReports() --> Property 'generateReports' does not exist on the type 'Department'
 
 // Advanced Techniques
 // Constructor Functions
