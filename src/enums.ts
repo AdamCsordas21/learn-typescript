@@ -136,4 +136,31 @@ function f5(obj: { X: number }) {
 
 f5(H)
 
+// Enums at Compile Time
+enum LogLevel {
+  ERROR,
+  WARN,
+  INFO,
+  DEBUG
+}
+/**
+ * This is equivalent to:
+ * type LogLevelStrings = 'ERROR' | 'WARN' | 'INFO' | 'DEBUG';
+ */
+type LogLevelStrings = keyof typeof LogLevel
+
+function printImportant(key: LogLevelStrings, message: string) {
+// function printImportant(key: LogLevel, message: string) {
+  const num = LogLevel[key]
+  if (num <= LogLevel.WARN) {
+    console.log('Log level key is:', key)
+    console.log('Log level value is:', num)
+    console.log('Log level message is:', message)
+  }
+}
+
+printImportant('ERROR', 'This is a message')
+// printImportant(LogLevel.ERROR, 'This is a message')
+// Argument of type 'LogLevel.ERROR' is not assignable to parameter of type '"ERROR" | "WARN" | "INFO" | "DEBUG"'.ts(2345)
+
 export {}
