@@ -95,4 +95,29 @@ function logger(s: NetworkState2) {
   }
 }
 
+// Intersection Types
+interface ErrorHandling {
+  success: boolean
+  error?: { message: string }
+}
+
+interface ArtworksData {
+  artwork: { title: string }[]
+}
+
+interface ArtistData {
+  artists: { name: string }[]
+}
+
+type ArtworkResponse = ArtworksData & ErrorHandling
+type ArtistsResponse = ArtistData & ErrorHandling
+
+const handleArtistResponse = (response: ArtistsResponse) => {
+  if (response.error) {
+    console.log(response.error.message)
+    return
+  }
+  console.log(response.artists)
+}
+
 export { }
