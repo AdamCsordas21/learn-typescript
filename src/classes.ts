@@ -204,4 +204,13 @@ let dad = new Octopus('Man with the 8 strong legs')
 // dad.name = 'Man with the 3-piece suit'
 // Cannot assign to 'name' because it is read-only property
 
+// Parameter Properties
+class Octopus2 {
+  readonly numberOfLegs: number = 8
+  constructor(readonly name: string) {}
+}
+
+let dad2 = new Octopus('Man with the 8 strong legs')
+dad2.name
+
 export { }
