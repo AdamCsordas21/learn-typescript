@@ -137,4 +137,57 @@ animal = rhino
 // Type 'Employee' is not assignable to type 'Animal6'.
 // Types have separate declarations of a private property 'name'.
 
+// Understanding Protected
+class Person {
+  protected name: string
+  constructor(name: string) {
+    this.name = name
+  }
+}
+
+class Employee2 extends Person {
+  private deparment: string
+  
+  constructor(name: string, department: string) {
+    super(name)
+    this.deparment = department
+  }
+  
+  public getElevatorPitch() {
+    return `Hello, my name is ${this.name} and I work in ${this.deparment}.`
+  }
+}
+
+let howard = new Employee2('Howard', 'Sales')
+console.log(howard.getElevatorPitch)
+// console.log(howard.name)
+// Property 'name' is protected and only accessible within class 'Person'
+// and its subclasses.ts(2445)
+
+class Person2 {
+  protected name: string
+  protected constructor(theName: string) {
+    this.name
+  }
+}
+
+// Employee can extend Person
+class Employee3 extends Person {
+  private deparment: string
+  
+  constructor(name: string, department: string) {
+    super(name)
+    this.deparment = department
+  }
+  
+  public getElavatorPitch() {
+    return `Hello, my name is ${this.name} and I work in ${this.deparment}.`
+  }
+}
+
+let james = new Employee3('James', 'Sales')
+let john = new Person('John')
+// Constructor of class 'Person' is protectec and only accessable within the
+// class declaration.
+
 export { }
