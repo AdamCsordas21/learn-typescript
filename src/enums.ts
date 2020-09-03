@@ -163,4 +163,26 @@ printImportant('ERROR', 'This is a message')
 // printImportant(LogLevel.ERROR, 'This is a message')
 // Argument of type 'LogLevel.ERROR' is not assignable to parameter of type '"ERROR" | "WARN" | "INFO" | "DEBUG"'.ts(2345)
 
+// Reverse Mappings
+enum Map {
+  A
+}
+
+let a = Map.A // 0
+let nameOfA = Map[a] // 'A'
+
+enum String {
+  abc = 'definitely not ABC'
+}
+
+// const Enums
+const enum Mune {
+  a = 1,
+  b = a * 10,
+  // c = 'c'.length
+  // const enum member initializers can only contain literal values and other computed enum values.ts(2474)
+}
+
+const munes = [Mune.a, Mune.b]
+
 export {}
