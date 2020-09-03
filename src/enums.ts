@@ -123,4 +123,17 @@ function f4(x: G) {
   }
 }
 
+// Enums at Runtime
+enum H {
+  X,
+  Y,
+  Z
+}
+
+function f5(obj: { X: number }) {
+  return obj.X
+}
+
+f5(H)
+
 export {}
