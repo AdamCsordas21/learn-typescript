@@ -269,4 +269,44 @@ let grid2 = new Grid(5.0) // 5x scale
 console.log(grid1.calculateDistanceFromOrigin({ x:10, y:10 }))
 console.log(grid2.calculateDistanceFromOrigin({ x:10, y:10 }))
 
+// Abstract Classes
+abstract class Animal7 {
+  abstract makeSound(): void
+  
+  move(): void {
+    console.log('roaming the earth...')
+  }
+}
+
+abstract class Deparment {
+  constructor(public name: string) {}
+  
+  printName(): void {
+    console.log('Deparment name: ' + this.name)
+  }
+  
+  abstract printMeeting(): void  // must be implemented in derived classes
+}
+
+class AccountingDepartment extends Deparment {
+  constructor() {
+    super('Accounting and Auditing') // constructor in derived classes must call super()
+  }
+  
+  printMeeting(): void {
+    console.log('The Accounting Deparment meets each Monday at 10am.')
+  }
+  
+  generateReport(): void {
+    console.log('Generating accounting reports...')
+  }
+}
+
+let department: Deparment // ok to create a referencet o an abstract type
+// deparment = new Deparment --> error: cannot create an instance of an abstract class
+department = new AccountingDepartment() // okk to create and assign a non-abstract subclass
+department.printName()
+department.printMeeting()
+// department.generateReports() --> Porperty 'generateReports' does not exist on the type 'Deparment'
+
 export { }
