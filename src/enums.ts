@@ -71,4 +71,56 @@ enum FileAccess {
   G = "123".length
 }
 
+// Union Enums and Enum Member Types
+enum ShapeKind {
+  Circle,
+  Square
+}
+
+interface Circle {
+  kind: ShapeKind.Circle
+  radius: number
+}
+
+interface Square {
+  kind: ShapeKind.Square
+  sideLength: number
+}
+
+let c: Circle = {
+  kind: ShapeKind.Circle,
+  // kind: ShapeKind.Square,
+  // Type 'ShapeKind.Square' is not assignable to type 'ShapeKind.Circle'.ts(2322)
+  radius: 100
+}
+
+enum G {
+  Foo,
+  Bar
+}
+/* 
+function f(x: G) {
+  if (x !== G.Foo || x !== G.Bar) {
+    // This condition will always return 'true' since the types 'G.Foo' and 'G.Bar' have no overlap.
+  }
+}
+
+function f2(x: boolean) {
+  if (x !== true || x !== false) {
+    // This condition will always return 'true' since the types 'true' and 'false' have no overlap.
+  }
+}
+*/
+function f3(x: boolean) {
+  if (x !== true && x !== false) {
+    // This condition will always return 'false' since the types 'true' and 'false' have no overlap.
+  }
+}
+
+function f4(x: G) {
+  if (x !== G.Foo && x !== G.Bar) {
+    // This condition will always return 'false' since the types 'true' and 'false' have no overlap.
+  }
+}
+
 export {}
