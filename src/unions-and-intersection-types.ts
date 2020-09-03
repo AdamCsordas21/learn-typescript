@@ -36,4 +36,39 @@ declare function getSmallPet(): Fish | Bird
 let pet = getSmallPet()
 pet.layEggs()
 
+// Discriminating Unions
+type NetworkLoadingState = {
+  state: 'loading'
+}
+
+type NetworkFailedState = {
+  state: 'failed'
+  code: number
+}
+
+type NetworkSuccesState = {
+  state: 'success'
+  response: {
+    title: string
+    duration: number
+    summary: string
+  }
+}
+
+type NetworkState =
+  | NetworkLoadingState
+  | NetworkFailedState
+  | NetworkSuccesState
+  
+function NetworkState(state: NetworkState): string {
+  switch (state.state) {
+    case 'loading':
+      return 'Downolading...'
+    case 'failed':
+      return `Error ${state.code} downloading`
+    case 'success':
+      return `Downloaded ${state.response.title} - ${state.response.summary}`
+  }
+}
+
 export { }
