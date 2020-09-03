@@ -46,4 +46,29 @@ enum BooleanLikeHeterogeneousEnum {
   Yes = 'Y'
 }
 
+// Computed and Constant members
+enum F {
+  X,
+  Y,
+  z
+}
+
+enum F2 {
+  A = 1,
+  B,
+  C
+}
+
+enum FileAccess {
+  // constant members
+  None,
+  Read = 1 << 1,
+  Write = 1 << 2,
+  ReadWrite = Read | Write,
+  WriteReadAndExplode = Write | Read | 1,
+  OnePlusTwo = 1 + 2,
+  // computed member
+  G = "123".length
+}
+
 export {}
