@@ -190,4 +190,18 @@ let john = new Person('John')
 // Constructor of class 'Person' is protectec and only accessable within the
 // class declaration.
 
+// Readonly Modifier
+class Octopus {
+  readonly name: string
+  readonly numberOfLegs: number = 8
+  
+  constructor(theName: string) {
+    this.name = theName
+  }
+}
+
+let dad = new Octopus('Man with the 8 strong legs')
+// dad.name = 'Man with the 3-piece suit'
+// Cannot assign to 'name' because it is read-only property
+
 export { }
