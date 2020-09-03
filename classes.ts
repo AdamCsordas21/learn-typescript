@@ -67,4 +67,18 @@ let tom: Animal = new Horse('Tommy the Palomino')
 sam.move()
 tom.move(34)
 
+// Public, Private, and Protected Modifiers
+// Public by Default
+class Animal3 {
+  public name: string
+  
+  public constructor(theName: string) {
+    this.name
+  }
+  
+  public move(distanceInMeters: number) {
+    console.log(`${this.name} moved ${distanceInMeters}m.`)
+  }
+}
+
 export { }
