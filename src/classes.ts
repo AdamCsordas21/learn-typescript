@@ -95,4 +95,46 @@ new Animal ('Cat').#name
 // Property '#name' is not accessible outside
 // class 'Animal' because it has a private identifier.
 
+// Understanding TypeScript's Private
+/*
+class Animal5 {
+  private name: string
+  
+  constructor(theName: string) {
+    this.name = theName
+  }
+}
+
+new Animal().name
+*/
+// Property 'name' does not exist on type 'Animal'.
+class Animal6 {
+  private name: string
+  constructor(theName: string) {
+    this.name = theName
+  }
+}
+
+class Rhino extends Animal6 {
+  constructor() {
+    super('Rhino')
+  }
+}
+
+class Employee {
+  private name: string
+  constructor(theName: string) {
+    this.name = theName
+  }
+}
+
+let animal = new Animal6('Goat')
+let rhino = new Rhino()
+let employee = new Employee('Bob')
+
+animal = rhino
+// animal = employee
+// Type 'Employee' is not assignable to type 'Animal6'.
+// Types have separate declarations of a private property 'name'.
+
 export { }
