@@ -150,7 +150,7 @@ enum LogLevel {
 type LogLevelStrings = keyof typeof LogLevel
 
 function printImportant(key: LogLevelStrings, message: string) {
-// function printImportant(key: LogLevel, message: string) {
+  // function printImportant(key: LogLevel, message: string) {
   const num = LogLevel[key]
   if (num <= LogLevel.WARN) {
     console.log('Log level key is:', key)
@@ -185,4 +185,12 @@ const enum Mune {
 
 const munes = [Mune.a, Mune.b]
 
-export {}
+// Ambient Enums
+declare enum Adam {
+  a = 1,
+  b,
+  c = 2
+}
+const adams = [Adam.a, Adam.b, Adam.c]
+
+export { }
