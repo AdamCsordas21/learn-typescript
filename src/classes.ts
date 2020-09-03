@@ -1,11 +1,11 @@
 // Classes
 class Greeter {
   greeting: string
-  
+
   constructor(message: string) {
     this.greeting = message
   }
-  
+
   greet() {
     return 'Hello, ' + this.greeting
   }
@@ -71,14 +71,28 @@ tom.move(34)
 // Public by Default
 class Animal3 {
   public name: string
-  
+
   public constructor(theName: string) {
     this.name
   }
-  
+
   public move(distanceInMeters: number) {
     console.log(`${this.name} moved ${distanceInMeters}m.`)
   }
 }
+
+// ECMAScript Private Fields
+/*
+class Animal4 {
+  #name: string
+  constructor(theName: string) {
+    this.#name = theName
+  }
+}
+
+new Animal ('Cat').#name
+*/
+// Property '#name' is not accessible outside
+// class 'Animal' because it has a private identifier.
 
 export { }
