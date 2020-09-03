@@ -31,4 +31,19 @@ enum E {
   E
 }
 
+// String Enums
+enum KeyboardControl {
+  Up = 'W',
+  Down = 'S',
+  Left = 'A',
+  Right = 'D',
+  Jump = 'Space',
+}
+
+// Heterogeneous Enums
+enum BooleanLikeHeterogeneousEnum {
+  No = 0,
+  Yes = 'Y'
+}
+
 export {}
