@@ -1,4 +1,4 @@
-// It's a tool that let you compose or combine exosting types instead of creating them from scratch
+// It's a tool that let you compose or combine existing types instead of creating them from scratch
 
 // Union Types
 function padLeft(value: string, padding: any) {
@@ -36,6 +36,11 @@ declare function getSmallPet(): Fish | Bird
 let pet = getSmallPet()
 pet.layEggs()
 
+// Only available in one of the two possible types
+// pet.swim();
+// Property 'swim' does not exist on type 'Bird | Fish'.
+//   Property 'swim' does not exist on type 'Bird'.
+
 // Discriminating Unions
 type NetworkLoadingState = {
   state: 'loading'
@@ -63,11 +68,48 @@ type NetworkState =
 function NetworkState(state: NetworkState): string {
   switch (state.state) {
     case 'loading':
-      return 'Downolading...'
+      return 'Downloading...'
     case 'failed':
       return `Error ${state.code} downloading`
     case 'success':
       return `Downloaded ${state.response.title} - ${state.response.summary}`
+  }
+}
+
+enum NetworkState3 {
+  Loading,
+  Failed,
+  Succes
+}
+
+interface NetworkEventSuccess {
+  state: NetworkState3.Succes
+  response: {
+    title: string
+    duration: number
+    summary: string
+  }
+}
+
+type NetworkEventFailed = {
+  state: NetworkState3.Failed
+  code: number
+}
+
+type NetworkEventLoading = {
+  state: NetworkState3.Loading
+}
+
+type NetworkEvent = NetworkEventSuccess | NetworkEventFailed | NetworkEventLoading
+
+function logEvent(event: NetworkEvent): string {
+  switch (event.state) {
+    case NetworkState3.Loading:
+      return 'loading request'
+    case NetworkState3.Failed:
+      return `failed with ${event.code}`
+    case NetworkState3.Succes:
+      return 'got response'
   }
 }
 
@@ -84,7 +126,7 @@ type NetworkState2 =
   | NetworkSuccesState
   | NetworkFromCachedState
 
-function logger(s: NetworkState2) {
+function logger(s: NetworkState2)/* : string - can't add this, because we don't cover the case of 'from_cache' */ {
   switch (s.state) {
     case 'loading':
       return 'loading request'
@@ -97,23 +139,53 @@ function logger(s: NetworkState2) {
 
 // Intersection Types
 interface ErrorHandling {
-  success: boolean
+  success: boolean // maybe this is not needed after all
   error?: { message: string }
 }
 
 interface ArtworksData {
-  artwork: { title: string }[]
+  artworks: { title: string }[]
 }
 
-interface ArtistData {
+interface ArtistsData {
   artists: { name: string }[]
 }
 
-type ArtworkResponse = ArtworksData & ErrorHandling
-type ArtistsResponse = ArtistData & ErrorHandling
+type ArtworksResponse = ArtworksData & ErrorHandling
+type ArtistsResponse = ArtistsData & ErrorHandling
 
-const handleArtistResponse = (response: ArtistsResponse) => {
+const handleArtistsResponse = (response: ArtistsResponse) => {
   if (response.error) {
+    console.log(response.error.message)
+    return
+  }
+  console.log(response.artists)
+}
+
+interface ErrorneousResponse {
+  success: false
+  error: { message: string }
+}
+
+interface SuccessfulResponse {
+  success: true
+}
+
+type ErrorHandling2 = ErrorneousResponse | SuccessfulResponse
+
+interface ArtworksData2 {
+  artworks: { title: string }[]
+}
+
+interface ArtistsData2 {
+  artists: { name: string }[]
+}
+
+type ArtworksResponse2 = ArtworksData2 & ErrorHandling2
+type ArtistsResponse2 = ArtistsData2 & ErrorHandling2
+
+const handleArtistsResponse2 = (response: ArtistsResponse2) => {
+  if (!response.success) {
     console.log(response.error.message)
     return
   }
