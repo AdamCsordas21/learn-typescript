@@ -147,12 +147,12 @@ class Person {
 
 class Employee2 extends Person {
   private deparment: string
-  
+
   constructor(name: string, department: string) {
     super(name)
     this.deparment = department
   }
-  
+
   public getElevatorPitch() {
     return `Hello, my name is ${this.name} and I work in ${this.deparment}.`
   }
@@ -174,12 +174,12 @@ class Person2 {
 // Employee can extend Person
 class Employee3 extends Person {
   private deparment: string
-  
+
   constructor(name: string, department: string) {
     super(name)
     this.deparment = department
   }
-  
+
   public getElavatorPitch() {
     return `Hello, my name is ${this.name} and I work in ${this.deparment}.`
   }
@@ -194,7 +194,7 @@ let john = new Person('John')
 class Octopus {
   readonly name: string
   readonly numberOfLegs: number = 8
-  
+
   constructor(theName: string) {
     this.name = theName
   }
@@ -207,7 +207,7 @@ let dad = new Octopus('Man with the 8 strong legs')
 // Parameter Properties
 class Octopus2 {
   readonly numberOfLegs: number = 8
-  constructor(readonly name: string) {}
+  constructor(readonly name: string) { }
 }
 
 let dad2 = new Octopus('Man with the 8 strong legs')
@@ -229,16 +229,16 @@ const fullNameMaxLength = 10
 
 class Player2 {
   private _fullName: string
-  
+
   get fullName(): string {
     return this._fullName
   }
-  
+
   set fullName(newName: string) {
     if (newName && newName.length > fullNameMaxLength) {
       throw new Error('fullName has a max length of ' + fullNameMaxLength)
     }
-    
+
     this._fullName = newName
   }
 }
@@ -253,38 +253,38 @@ if (player.fullName) {
 // Static Properties
 class Grid {
   static origin = { x: 0, y: 0 }
-  
-  calculateDistanceFromOrigin(point : { x:number, y: number }) {
+
+  calculateDistanceFromOrigin(point: { x: number, y: number }) {
     let xDist = point.x - Grid.origin.x
     let yDist = point.y - Grid.origin.y
     return Math.sqrt(xDist * xDist + yDist * yDist) / this.scale
   }
-  
-  constructor(public scale: number) {}
+
+  constructor(public scale: number) { }
 }
 
 let grid1 = new Grid(1.0) // 1x scale
 let grid2 = new Grid(5.0) // 5x scale
 
-console.log(grid1.calculateDistanceFromOrigin({ x:10, y:10 }))
-console.log(grid2.calculateDistanceFromOrigin({ x:10, y:10 }))
+console.log(grid1.calculateDistanceFromOrigin({ x: 10, y: 10 }))
+console.log(grid2.calculateDistanceFromOrigin({ x: 10, y: 10 }))
 
 // Abstract Classes
 abstract class Animal7 {
   abstract makeSound(): void
-  
+
   move(): void {
     console.log('roaming the earth...')
   }
 }
 
 abstract class Deparment {
-  constructor(public name: string) {}
-  
+  constructor(public name: string) { }
+
   printName(): void {
-    console.log('Deparment name: ' + this.name)
+    console.log(`Deparment name: ${this.name}`)
   }
-  
+
   abstract printMeeting(): void  // must be implemented in derived classes
 }
 
@@ -292,11 +292,11 @@ class AccountingDepartment extends Deparment {
   constructor() {
     super('Accounting and Auditing') // constructor in derived classes must call super()
   }
-  
+
   printMeeting(): void {
     console.log('The Accounting Deparment meets each Monday at 10am.')
   }
-  
+
   generateReport(): void {
     console.log('Generating accounting reports...')
   }
@@ -308,5 +308,29 @@ department = new AccountingDepartment() // okk to create and assign a non-abstra
 department.printName()
 department.printMeeting()
 // department.generateReports() --> Porperty 'generateReports' does not exist on the type 'Deparment'
+
+// Advanced Techniques
+// Constructor Functions
+class Greeter2 {
+  static standardGreeting = 'Hello, there'
+  greeting: string
+  greet() {
+    if (this.greeting) {
+      return `Hello, ${this.greeting}`
+    } else {
+      return Greeter2.standardGreeting
+    }
+  }
+}
+
+let greeter3: Greeter2
+greeter3 = new Greeter2()
+console.log(greeter3.greet()) // 'Hello, there'
+
+let greeterMaker: typeof Greeter2 = Greeter2
+greeterMaker.standardGreeting = 'Hey there!'
+
+let greeter4: Greeter2 = new greeterMaker()
+console.log(greeter4.greet) // Hey there!
 
 export { }
