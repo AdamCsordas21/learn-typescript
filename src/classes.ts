@@ -213,4 +213,41 @@ class Octopus2 {
 let dad2 = new Octopus('Man with the 8 strong legs')
 dad2.name
 
+// Accessors
+class Player {
+  fullName: string
+}
+
+let player = new Player()
+player.fullName = 'Bob Smith'
+
+if (player.fullName) {
+  console.log(player.fullName)
+}
+
+const fullNameMaxLength = 10
+
+class Player2 {
+  private _fullName: string
+  
+  get fullName(): string {
+    return this._fullName
+  }
+  
+  set fullName(newName: string) {
+    if (newName && newName.length > fullNameMaxLength) {
+      throw new Error('fullName has a max length of ' + fullNameMaxLength)
+    }
+    
+    this._fullName = newName
+  }
+}
+
+let player2 = new Player()
+player.fullName = 'Adam Csordas'
+
+if (player.fullName) {
+  console.log(player.fullName)
+}
+
 export { }
