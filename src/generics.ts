@@ -30,8 +30,38 @@ function loggingIndetity<T>(arg: T[]) {
 }
 
 function logginIndentity2<T>(arg: Array<T>): Array<T> {
-  console.log(arg.length)
+  console.log(arg.length) // Array has a .length, so no more error
   return arg
 }
+
+// Generic Types
+
+
+// Generic Classes
+class GenericNumber<T> {
+  zeroValue: T
+  add: (x: T, y: T) => T
+}
+
+let myGenericNumber = new GenericNumber<number>()
+myGenericNumber.zeroValue = 0
+myGenericNumber.add = function(x, y) {
+  return x + y
+}
+
+// @strict: false
+class GenericNumber2<T> {
+  zeroValue: T
+  add: (x: T, y: T) => T
+}
+
+// ---cut---
+let stringNumber = new GenericNumber<string>()
+stringNumber.zeroValue = ''
+stringNumber.add = function(x, y) {
+  return x + y
+}
+
+console.log(stringNumber.add(stringNumber.zeroValue, 'test'))
 
 export { }
