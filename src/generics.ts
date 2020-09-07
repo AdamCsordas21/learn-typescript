@@ -35,7 +35,49 @@ function logginIndentity2<T>(arg: Array<T>): Array<T> {
 }
 
 // Generic Types
+function identity4<T>(arg: T): T {
+  return arg;
+}
 
+// let myIdentity: <T>(arg: T) => T = identity;
+// Type '(arg: number) => number' is not assignable to type '<T>(arg: T) => T'.
+// Types of parameters 'arg' and 'arg' are incompatible.
+// Type 'T' is not assignable to type 'number'.ts(2322)
+
+function indentity5<T>(arg: T): T {
+  return arg
+}
+
+// let myIdentity: <U>(arg: U) => U = identity
+// Type '(arg: number) => number' is not assignable to type '<T>(arg: T) => T'.
+// Types of parameters 'arg' and 'arg' are incompatible.
+// Type 'T' is not assignable to type 'number'.ts(2322)
+
+function indentity6<T>(arg: T): T {
+  return arg  
+}
+
+let myIdentity: { <T>(arg: T): T } = indentity
+
+interface GenericIdentityFn {
+  <T>(arg: T): T
+}
+
+function identity7<T>(arg: T): T {
+  return arg
+}
+
+let myIdentity2: GenericIdentityFn = indentity
+
+interface GenericIdentityFn2<T> {
+  (arg: T): T
+}
+
+function identity8<T>(arg: T): T {
+  return arg
+}
+
+let myIdentity3: GenericIdentityFn2<number> = identity
 
 // Generic Classes
 class GenericNumber<T> {
