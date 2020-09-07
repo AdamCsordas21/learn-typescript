@@ -106,4 +106,25 @@ stringNumber.add = function(x, y) {
 
 console.log(stringNumber.add(stringNumber.zeroValue, 'test'))
 
+// Generic Constraints
+function loggingIndetity2<T>(arg: T): T {
+  // console.log(arg.length)
+  // Property 'length' does not exist on type 'T'.ts(2339)
+  return arg
+}
+
+interface Lengthwise {
+  length: number
+}
+
+function loggingIndentity3<T extends Lengthwise>(arg: T): T {
+  console.log(arg.length) // Now we know it has a .length property, so no more error
+  return arg
+}
+
+// loggingIndentity3(3)
+// Argument of type '3' is not assignable to parameter of type 'Lengthwise'.ts(2345)
+
+loggingIndentity3({ length: 10, value: 3 })
+
 export { }
