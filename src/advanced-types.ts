@@ -20,8 +20,8 @@ if ('swim' in pet) {
 
 // Property accessors
 let pet2 = getSmallPet()
-let fishPet = pet as Fish
-let birdPet = pet as Bird
+let fishPet = pet2 as Fish
+let birdPet = pet2 as Bird
 
 if (fishPet.swim) {
   fishPet.swim()
@@ -30,5 +30,22 @@ if (fishPet.swim) {
 }
 // This is not the sort of code you would want in your codebase however.
 
+// User-Defined Type Guards
+// Using type predicates
+function isFish(pet: Fish | Bird): pet is Fish {
+  return (pet as Fish).swim !== undefined
+}
+
+let pet3 = getSmallPet()
+
+// Both calls to 'swim' and 'fly' are now ok.
+if (isFish(pet3)) {
+  pet3.swim()
+} else {
+  pet3.fly
+}
+
+// Notice that TypeScript not only knows that pet is a fish in the if branch,
+// It also knows that in the else branch, you don't have a Fish, so you must have a bird
 
 export {}
