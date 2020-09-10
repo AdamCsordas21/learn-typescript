@@ -136,7 +136,31 @@ stringOrNull = null
 // Note that TypeScript treats null and undefined differently in order to match JavaScript semantics.
 // string | null is a different type than string | undefined and string | undefined | null.
 
+// Optional Parameters and Properties
+function f(x: number, y?: number) {
+  return x + (y ?? 0)
+}
 
+f(1, 2)
+f(1)
+f(1, undefined)
+// f(1, null)
+// Argument of type 'null' is not assignable to parameter of type 'number | undefined'.ts(2345)
 
+class C {
+  a: number
+  b?: number
+}
+
+let c = new C()
+
+c.a = 12
+// c.a = undefined
+// Type 'undefined' is not assignable to type 'number'.ts(2322)
+
+c.b = 13
+c.b = undefined
+// c.b = null
+// Type 'null' is not assignable to type 'number | undefined'.ts(2322)
 
 export { }
