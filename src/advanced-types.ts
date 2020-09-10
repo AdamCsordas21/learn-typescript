@@ -4,7 +4,7 @@ type Fish = { swim: () => void }
 type Bird = { fly: () => void }
 declare function getSmallPet(): Fish | Bird
 
-let pet = getSmallPet ()
+let pet = getSmallPet()
 
 // You can use the 'in' operator to check
 if ('swim' in pet) {
@@ -48,4 +48,12 @@ if (isFish(pet3)) {
 // Notice that TypeScript not only knows that pet is a fish in the if branch,
 // It also knows that in the else branch, you don't have a Fish, so you must have a bird
 
-export {}
+// Using the in Operator
+function move(pet4: Fish | Bird) {
+  if ('swim' in pet4) {
+    return pet4.swim()
+  }
+  return pet4.fly
+}
+
+export { }
