@@ -122,5 +122,21 @@ if (padder instanceof StringPadder) {
 //      ^ = Could not get LSP result: er;>
 }
 
+// Nullable Types
+let exampleString = 'foo'
+// exampleString = null
+// Type 'null' is not assignable to type 'string'.ts(2322)
+
+let stringOrNull: string | null = 'bar'
+stringOrNull = null
+
+// stringOrNull = undefined
+// Type 'undefined' is not assignable to type 'string | null'.ts(2322
+
+// Note that TypeScript treats null and undefined differently in order to match JavaScript semantics.
+// string | null is a different type than string | undefined and string | undefined | null.
+
+
+
 
 export { }
