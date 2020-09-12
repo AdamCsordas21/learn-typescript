@@ -226,4 +226,42 @@ people.next.name
 people.next.next.name
 people.next.next.next.name
 
+// Interfaces vs Type Aliases
+
+// Interface
+// Extending an interface
+declare function getBear(): any
+
+interface Animal {
+  name: string
+}
+
+interface Bear extends Animal {
+  honey: boolean
+}
+
+const bear = getBear()
+bear.name
+bear.honey
+
+// Adding new fields to an existing interface
+
+
+// Type
+// Extanding a Type via Intersections
+type Animal2 = {
+  name: string
+}
+
+type Bear2 = Animal2 & {
+  honey: Boolean
+}
+
+const bear2 = getBear()
+bear.name
+bear.honey
+
+// A Type cannot be changed after being created
+
+
 export { }
