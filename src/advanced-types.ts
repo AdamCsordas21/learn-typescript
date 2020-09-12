@@ -198,4 +198,32 @@ if (user) {
 // postfix ! lets you short circuit the nullability
 user!.email!.length
 
+// Type Aliases
+type Second = number
+
+let timeInSecond: number = 10
+let time: Second = 10
+
+type Conatainer<T> = { value: T }
+
+type Tree<T> = {
+  value: T
+  left?: Tree<T>
+  right?: Tree<T>
+}
+
+declare function getDriversLicenseQueue(): LinkedList<Person>;
+
+type LinkedList<Type> = Type & { next: LinkedList<Type> }
+
+interface Person {
+  name: string
+}
+
+let people = getDriversLicenseQueue()
+people.name
+people.next.name
+people.next.next.name
+people.next.next.next.name
+
 export { }
