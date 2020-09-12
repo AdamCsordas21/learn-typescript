@@ -91,14 +91,14 @@ interface Padder {
 }
 
 class SpaceRepeatingPadder implements Padder {
-  constructor(private numSpaces: number) {}
+  constructor(private numSpaces: number) { }
   getPaddingString() {
     return Array(this.numSpaces + 1).join('')
   }
 }
 
 class StringPadder implements Padder {
-  constructor(private value: string) {}
+  constructor(private value: string) { }
   getPaddingString() {
     return this.value
   }
@@ -106,8 +106,8 @@ class StringPadder implements Padder {
 
 function getRandomPadder() {
   return Math.random() < 0.5
-  ? new SpaceRepeatingPadder(4)
-  : new StringPadder('  ')
+    ? new SpaceRepeatingPadder(4)
+    : new StringPadder('  ')
 }
 
 let padder: Padder = getRandomPadder()
@@ -115,11 +115,11 @@ let padder: Padder = getRandomPadder()
 
 if (padder instanceof SpaceRepeatingPadder) {
   padder
-//      ^ = Could not get LSP result: er;>
+  //      ^ = Could not get LSP result: er;>
 }
 if (padder instanceof StringPadder) {
   padder
-//      ^ = Could not get LSP result: er;>
+  //      ^ = Could not get LSP result: er;>
 }
 
 // Nullable Types
@@ -162,5 +162,40 @@ c.b = 13
 c.b = undefined
 // c.b = null
 // Type 'null' is not assignable to type 'number | undefined'.ts(2322)
+
+// Type Guards and Type Assertions
+function f2(stringOrNull: string | null): string {
+  if (stringOrNull === null) {
+    return 'defualt'
+  } else {
+    return stringOrNull
+  }
+}
+
+function f3(stringOrNull: string | null): string {
+  return stringOrNull ?? 'default'
+}
+
+function getUser(id: string): UserAccount | undefined {
+  return {} as any;
+}
+
+interface UserAccount {
+  id: number
+  email?: string
+}
+
+const user = getUser('admin')
+// user.id
+// Object is possibly 'undefined'.ts(2532)
+
+if (user) {
+ // user.email.length
+ // Object is possibly 'undefined'.ts(2532)
+}
+
+// Instead if you are sure that these objects or fields exist, the
+// postfix ! lets you short circuit the nullability
+user!.email!.length
 
 export { }
