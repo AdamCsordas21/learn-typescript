@@ -345,4 +345,27 @@ let year: number = getProperty(taxi, 'year')
 // let unknown = getProperty(taxi, 'unknown')
 // Argument of type '"unknown"' is not assignable to parameter of type '"manufacturer" | "model" | "year"'.ts(2345)
 
+// Index Types and Index Signatures
+interface Dictionary<T> {
+  [key: string]: T
+}
+let keys: keyof Dictionary<number>
+//      ^ = let keys: string | number
+
+let value: Dictionary<number>['foo']
+//       ^ = let value: number
+
+interface Dictionary2<T> {
+  [key: number]: T
+}
+
+let keys2: keyof Dictionary2<number>
+//       ^ = let keys2 = number
+
+let numberValue: Dictionary2<number>[42]
+//       ^ = let numberValue: number
+
+// let value2: Dictionary2<number>['foo']
+// Property 'foo' does not exist on type 'Dictionary<number>'.
+
 export { }
