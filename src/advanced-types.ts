@@ -190,8 +190,8 @@ const user = getUser('admin')
 // Object is possibly 'undefined'.ts(2532)
 
 if (user) {
- // user.email.length
- // Object is possibly 'undefined'.ts(2532)
+  // user.email.length
+  // Object is possibly 'undefined'.ts(2532)
 }
 
 // Instead if you are sure that these objects or fields exist, the
@@ -270,7 +270,7 @@ bear.honey
 
 // Polymorphic this Type
 class BasicCalculator {
-  public constructor(protected value: number = 0) {}
+  public constructor(protected value: number = 0) { }
   public currentValue(): number {
     return this.value
   }
@@ -367,5 +367,101 @@ let numberValue: Dictionary2<number>[42]
 
 // let value2: Dictionary2<number>['foo']
 // Property 'foo' does not exist on type 'Dictionary<number>'.
+
+// Mapped Types
+interface PersonSubset {
+  name?: string
+  age?: number
+}
+
+interface PersonReadonly {
+  readonly name: string
+  readonly age: number
+}
+
+type Partial<T> = {
+  [P in keyof T]?: T[P]
+}
+
+type Readonly<T> = {
+  readonly [P in keyof T]: T[P]
+}
+
+type PersonPartial = Partial<Person>
+//   ^ = type PersonPartial = {
+//  name?: string | undefined
+//  age?: number | undefined
+// }
+
+type ReadonlyPerson = Readonly<Person>
+//   ^ = type ReadonlyPerson = {
+//  readonly name: string
+//  readonly age: number
+// }
+
+// Use this:
+type PartialWithNewMemeber<T> = {
+  [P in keyof T]?: T[P]
+} & { newMember: boolean }
+
+// This is an error!
+type WrongPartialWithNewMember<T> = {
+  [P in keyof T]?: T[P]
+  // newMember: boolean
+  // 'boolean' only refers to a type, but is being used as a value here.ts(2693)
+}
+// Declaration or statement expected.
+
+type Keys = 'option1' | 'option2'
+type Flags = { [K in Keys]: boolean }
+
+type Flags2 = {
+  option1: boolean
+  option2: boolean
+}
+
+type NullablePerson = { [P in keyof Person]: Person[P] | null }
+//   ^ = type NullablePerson = {
+//  name: string | null
+//  age: number | null
+// }
+
+type PartialPerson = { [P in keyof Person]?: Person[P] }
+//   ^ = type PartialPerson = {
+//  name?: string | undefined
+//  age?: number | undefined
+// }
+
+type Nullable<T> = { [P in keyof T]: T[P] | null }
+type Partial2<T> = { [P in keyof T]?: T[P] }
+
+type Proxy<T> = {
+  get(): T
+  set(value: T): void
+}
+
+type Proxify<T> = {
+  [P in keyof T]: Proxy<T[P]>
+}
+
+function proxify<T>(o: T): Proxify<T> {
+  return o[1]
+}
+
+let props = { rooms: 4 }
+let proxyProps = proxify(props)
+//  ^ = let proxyProps: Proxify<{
+//  rooms: number
+// }>
+
+type Pick<T, K extends keyof T> = {
+  [P in K]: T[P]
+}
+
+type Record<K extends keyof any, T> = {
+  [P in K]: T
+}
+
+type ThreeStringProps = Record<'prop1' | 'prop2' | 'prop3', string>
 
 export { }
