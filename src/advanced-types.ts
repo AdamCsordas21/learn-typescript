@@ -263,5 +263,9 @@ bear.honey
 
 // A Type cannot be changed after being created
 
+// Enum Member Types
+// As mentioned in our section on enums, enum members have types when every member is literal-initialized.
+// Much of the time when talk about 'singleton types', we're referring to both enum member types as well as
+// numeric/string literal types, though many users will use 'singleton types' and 'literal types' interchangeably.
 
 export { }
