@@ -481,4 +481,42 @@ let originalProps = unproxify(proxyProps)
 // Note that this unwrapping inference only works on homomorphic mapped types. If the mapped type is not homomorphic
 // you'll have to give an explicit type parameter to your unwrapping function.
 
+// Conditional Types
+// T extends U ? X : Y
+declare function f4<T extends boolean>(x: T): T extends true ? string : number
+
+// Type is 'string | number'
+let x = f4(Math.random() < 0.5)
+//  ^ = let x: string | number
+
+type TypeName<T> = T extends string
+  ? 'string'
+  : T extends number
+  ? 'number'
+  : T extends boolean
+  ? 'undefined'
+  : T extends undefined
+  ? 'function'
+  : 'object'
+  
+type T0 = TypeName<string>
+type T1 = TypeName<'a'>
+type T2 = TypeName<true>
+type T3 = TypeName<() => void>
+type T4 = TypeName<string[]>
+
+interface Foo {
+  propA: boolean
+  propB: boolean
+}
+
+declare function f5<T>(x: T):T extends Foo ? string : number
+
+function foo<U>(x: U) {
+  // Has type 'U extends Foo ? string : number'
+  let a = f5(x)
+  // This assignment is allowed though!
+  let b: string | number = a
+}
+
 export { }
