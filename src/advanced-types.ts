@@ -301,4 +301,48 @@ let v2 = new ScientificCalculator(2).multiply(5).sin().add(1).currentValue
 // interface. multiply would have returned BasicCalculator, which doens't have the sin method. However, this types,
 // multiply return this, which is ScientificCalculator here.
 
+// Index Types
+// With JavaScript it would look like this
+function pluck(o, propertyNames) {
+  return propertyNames.map((n) => o[n])
+}
+
+// With TypeScript
+function pluck2<T, K extends keyof T>(o: T, propertyNames: K[]): T[K][] {
+  return propertyNames.map((n) => o[n])
+}
+
+interface Car {
+  manufacturer: string
+  model: string
+  year: number
+}
+
+let taxi: Car = {
+  manufacturer: 'Toyota',
+  model: 'Camry',
+  year: 2014,
+}
+//Manufacturer and model are both of type string, so we can pluck them both into a typed string array.
+let makeAndModel: string[] = pluck2(taxi, ['manufacturer', 'model'])
+
+// If we try to pluck model and year, we get an array of a union type: (string | number)[]
+let modelYear = pluck2(taxi, ['model', 'year'])
+
+let carProps: keyof Car
+//         ^ = let carProps: 'manufacturer' | 'model' | 'year'
+
+// pluck2(taxi, ['year', 'unknown'])
+// Type '"unknown"' is not assignable to type '"manufacturer" | "model" | "year"'.ts(2322)
+
+function getProperty<T, K extends keyof T>(o: T, propertyName: K): T[K] {
+  return o[propertyName] // o[propertyName] is of type T[K]
+}
+
+let manufacturer: string = getProperty(taxi, 'manufacturer')
+let year: number = getProperty(taxi, 'year')
+
+// let unknown = getProperty(taxi, 'unknown')
+// Argument of type '"unknown"' is not assignable to parameter of type '"manufacturer" | "model" | "year"'.ts(2345)
+
 export { }
