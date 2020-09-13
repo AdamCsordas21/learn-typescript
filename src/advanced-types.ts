@@ -323,7 +323,7 @@ let taxi: Car = {
   model: 'Camry',
   year: 2014,
 }
-//Manufacturer and model are both of type string, so we can pluck them both into a typed string array.
+// Manufacturer and model are both of type string, so we can pluck them both into a typed string array.
 let makeAndModel: string[] = pluck2(taxi, ['manufacturer', 'model'])
 
 // If we try to pluck model and year, we get an array of a union type: (string | number)[]
@@ -463,5 +463,22 @@ type Record<K extends keyof any, T> = {
 }
 
 type ThreeStringProps = Record<'prop1' | 'prop2' | 'prop3', string>
+
+// Inference from Mapped Types
+function unproxify<T>(t: Proxify<T>) {
+  let result = {} as T
+  for (const k in t) {
+    result[k] = t[k].get()
+  }
+  return result
+}
+
+let originalProps = unproxify(proxyProps)
+//  ^ = let originalProps: {
+//  rooms: number
+// }
+
+// Note that this unwrapping inference only works on homomorphic mapped types. If the mapped type is not homomorphic
+// you'll have to give an explicit type parameter to your unwrapping function.
 
 export { }
