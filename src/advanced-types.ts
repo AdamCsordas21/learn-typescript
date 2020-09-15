@@ -566,7 +566,8 @@ function f7<T extends string | undefined>(x: T, y: NotNullable<T>) {
 // Type 'string | number' is not assignable to type 'string'.
 // Type 'number' is not assignable to type 'string'.ts(2322)
 
-let s2: string = y
+// let s2: string = y
+// Cannot find name 'y'.ts(2304)
 
 type FunctionPropertyNames<T> = {
   [K in keyof T]: T[K] extends Function ? K : never
@@ -589,5 +590,49 @@ type T17 = FunctionPropertyNames<Part>
 type T18 = NonFunctionPropertyNames<Part>
 type T19 = FunctionProperties<Part>
 type T20 = NonFunctionProperties<Part>
+
+// Type Inference in Conditional Types
+type ReturnType<T> = T extends (...args: any[]) => infer R ? R : any
+
+type Unpacked<T> = T extends (infer U)[]
+  ? U
+  : T extends (...args: any[]) => infer U
+  ? U
+  : T extends Promise<infer U>
+  ? U
+  : T
+  
+type T21 = Unpacked<string>
+type T22 = Unpacked<string[]>
+type T23 = Unpacked<() => string>
+type T24 = Unpacked<Promise<string>>
+type T25 = Unpacked<Promise<string>[]>
+type T26 = Unpacked<Unpacked<Promise<string>[]>>
+
+type Foo2<T> = T extends { a: infer U, b: infer U } ? U : never
+type T37 = Foo2<{ a: string, b: string }>
+type T38 = Foo2<{ a: string, b: number }>
+
+type Bar<T> = T extends { a: (x: infer U) => void, b: (x: infer U) => void }
+  ? U
+  : never
+  
+type T39 = Bar<{ a: (x: string) => void, b: (x: string) => void }>
+type T40 = Bar<{ a: (x: string) => void, b: (x: number) => void }>
+
+declare function foo2(x: string): number
+declare function foo2(x: number): string
+declare function foo2(x: string | number): string | number
+
+type T41 = ReturnType<typeof foo2>
+
+// type ReturnType2<T extends (...args: any[]) => infer R> = R
+// 'infer' declarations are only permitted in the 'extends' clause of a conditional type.ts(1338)
+// Cannot find name 'R'.ts(2304)
+
+type AnyFunction = (...args: any[]) => any
+type ReturnType2<T extends AnyFunction> = T extends (...args: any[]) => infer R
+  ? R
+  : any
 
 export { }
