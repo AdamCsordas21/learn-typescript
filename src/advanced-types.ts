@@ -519,4 +519,75 @@ function foo<U>(x: U) {
   let b: string | number = a
 }
 
+// Distributive Conditional Types
+type T5 = TypeName<string | (() => void)>
+type T6 = TypeName<string | string[] | undefined>
+type T7 = TypeName<string[] | number[]>
+
+type BoxedValue<T> = { value: T }
+type BoxedArray<T> = { array: T[] }
+type Boxed<T> = T extends any[] ? BoxedArray<T[number]> : BoxedValue<T>
+
+type T8 = Boxed<string>
+type T9 = Boxed<number[]>
+type T10 = Boxed<string | number[]>
+
+// Remove types from T that are assignable to U
+type Diff<T, U> = T extends U ? never : T
+
+// Remove types from T that are not assignable to U
+type Filter<T, U> = T extends U ? T : never
+
+type T11 = Diff<'a' | 'b'| 'c' | 'd', 'a' | 'c' | 'f'>
+type T12 = Filter<'a' | 'b' | 'c' |'d', 'a' | 'c' | 'f' >
+type T13 = Diff<string | number | (() => void), Function>
+type T14 = Filter<string | number | (() => void), Function>
+
+// Remove null and undefined from T
+type NotNullable<T> = Diff<T, null | undefined>
+type T15 = NotNullable<string | number | undefined>
+type T16 = NotNullable<string[] | null | undefined>
+
+function f6<T>(x: T, y: NotNullable<T>) {
+  x = y
+  // y = x
+  // Type 'T' is not assignable to type 'Diff<T, null | undefined>'.ts(2322)
+}
+
+function f7<T extends string | undefined>(x: T, y: NotNullable<T>) {
+  x = y
+  // y = x
+  // Type 'T' is not assignable to type 'Diff<T, null | undefined>'.
+  // Type 'string | undefined' is not assignable to type 'Diff<T, null | undefined>'.
+  // Type 'undefined' is not assignable to type 'Diff<T, null | undefined>'.ts(2322)
+}
+
+// let s1: string = x
+// Type 'string | number' is not assignable to type 'string'.
+// Type 'number' is not assignable to type 'string'.ts(2322)
+
+let s2: string = y
+
+type FunctionPropertyNames<T> = {
+  [K in keyof T]: T[K] extends Function ? K : never
+}[keyof T]
+type FunctionProperties<T> = Pick<T, FunctionPropertyNames<T>>
+
+type NonFunctionPropertyNames<T> = {
+  [K in keyof T]: T[K] extends Function ? never : K
+}[keyof T]
+type NonFunctionProperties<T> = Pick<T, NonFunctionPropertyNames<T>>
+
+interface Part {
+  id: number
+  name: string
+  subparts: Part[]
+  updatePart(newName: string): void
+}
+
+type T17 = FunctionPropertyNames<Part>
+type T18 = NonFunctionPropertyNames<Part>
+type T19 = FunctionProperties<Part>
+type T20 = NonFunctionProperties<Part>
+
 export { }
