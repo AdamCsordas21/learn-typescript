@@ -157,4 +157,21 @@ type T24 = ReturnType<never>
 // Type 'Function' does not satisfy the constraint '(...args: any) => any'.
 // Type 'Function' provides no match for the signature '(...args: any): any'.ts(2344)
 
+// InstanceType<Type>
+// Constructs a type consisting of the instance type of a constructor function in Type.
+class C {
+  x = 0
+  y = 0
+}
+
+type T27 = InstanceType<typeof C>
+type T28 = InstanceType<any>
+type T29 = InstanceType<never>
+// type T30 = InstanceType<string>
+// Type 'string' does not satisfy the constraint 'new (...args: any) => any'.ts(2344)
+
+// type T31 = InstanceType<Function>
+// Type 'Function' does not satisfy the constraint 'new (...args: any) => any'.
+// Type 'Function' provides no match for the signature 'new (...args: any): any'.ts(2344)
+
 export {}
