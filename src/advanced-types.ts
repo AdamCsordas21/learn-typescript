@@ -624,7 +624,7 @@ declare function foo2(x: string): number
 declare function foo2(x: number): string
 declare function foo2(x: string | number): string | number
 
-type T41 = ReturnType<typeof foo2>
+type T41 = ReturnType2<typeof foo2>
 
 // type ReturnType2<T extends (...args: any[]) => infer R> = R
 // 'infer' declarations are only permitted in the 'extends' clause of a conditional type.ts(1338)
