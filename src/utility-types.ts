@@ -127,4 +127,15 @@ type T13 = Parameters<never>
 // Type 'Function' does not satisfy the constraint '(...args: any) => any'.
 // Type 'Function' provides no match for the signature '(...args: any): any'.ts(2344)
 
+// ConstructorParameters<Type>
+// Constructs a tuple or array type from the types of a constructor function type. It produces a tuple type with all
+// the parameter types (or the type never if Type is not a function).
+type T14 = ConstructorParameters<ErrorConstructor>
+type T15 = ConstructorParameters<FunctionConstructor>
+type T16 = ConstructorParameters<RegExpConstructor>
+type T17 = ConstructorParameters<any>
+// type T18 = ConstructorParameters<Function>
+// Type 'Function' does not satisfy the constraint 'new (...args: any) => any'.
+// Type 'Function' provides no match for the signature 'new (...args: any): any'.ts(2344)
+
 export {}
