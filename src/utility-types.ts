@@ -59,4 +59,21 @@ const nav: Record<Page, PageInfo> = {
 
 nav.about
 
+// Pick<Type, Keys>
+// Constructs a type by picking the set of properties Keys from Type.
+interface Todo3 {
+  title: string
+  description: string
+  completed: boolean
+}
+
+type TodoPreview = Pick<Todo3, 'title' | 'completed'>
+
+const todo4: TodoPreview = {
+  title: 'Clean room',
+  completed: false
+}
+
+todo4
+
 export {}
