@@ -138,4 +138,23 @@ type T17 = ConstructorParameters<any>
 // Type 'Function' does not satisfy the constraint 'new (...args: any) => any'.
 // Type 'Function' provides no match for the signature 'new (...args: any): any'.ts(2344)
 
+// ReturnType<Type>
+// Constructs a type consisting of the return type of function Type.
+
+declare function f2(): { a: number, b: string }
+
+type T18 = ReturnType<() => string>
+type T19 = ReturnType<(s: string) => void>
+type T20 = ReturnType<<T>() => T>
+type T21 = ReturnType<<T extends UIEvent, U extends number[]>() => T>
+type T22 = ReturnType<typeof f2>
+type T23 = ReturnType<any>
+type T24 = ReturnType<never>
+// type T25 = ReturnType<string>
+// Type 'string' does not satisfy the constraint '(...args: any) => any'.ts(2344)
+
+// type T26 = ReturnType<Function>
+// Type 'Function' does not satisfy the constraint '(...args: any) => any'.
+// Type 'Function' provides no match for the signature '(...args: any): any'.ts(2344)
+
 export {}
