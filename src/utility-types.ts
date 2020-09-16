@@ -42,4 +42,21 @@ const todo3: Readonly<Todo2> = {
 // Object.freeze
 // function freeze<Type>(obj: Type): Readonly<Type>
 
+// Record<Keys,Type>
+// Constructs a type with a set of properties Keys of type Type. This utility can be used to mapthe properties of
+// a type to another type.
+interface PageInfo {
+  title: string
+}
+
+type Page = 'home' | 'about' | 'contact'
+
+const nav: Record<Page, PageInfo> = {
+  about: { title: 'about' },
+  contact: { title: 'contact' },
+  home: { title: 'home' }
+}
+
+nav.about
+
 export {}
