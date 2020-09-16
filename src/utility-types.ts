@@ -104,4 +104,9 @@ type T2 = Exclude<string | number | (() => void), Function>
 type T3 = Extract<'a' | 'b' | 'c', 'a' | 'f'>
 type T4 = Extract<string | number | (() => void), Function>
 
+// NonNullable<Type>
+// Constructs a type by excluding null and undefined from Type
+type T5 = NonNullable<string | number | undefined>
+type T6 = NonNullable<string[] | null | undefined>
+
 export {}
