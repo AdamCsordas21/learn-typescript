@@ -99,4 +99,9 @@ type T0 = Exclude<'a' | 'b' | 'c', 'a'>
 type T1 = Exclude<'a' | 'b' | 'c', 'a' | 'b'>
 type T2 = Exclude<string | number | (() => void), Function>
 
+// Extract<Type, Union>
+// Constructs a type by extracting from Type all union members that are assignable to Union.
+type T3 = Extract<'a' | 'b' | 'c', 'a' | 'f'>
+type T4 = Extract<string | number | (() => void), Function>
+
 export {}
