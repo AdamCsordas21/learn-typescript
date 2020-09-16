@@ -76,4 +76,21 @@ const todo4: TodoPreview = {
 
 todo4
 
+// Omit<Type, Keys>
+// Constructs a type by picking all properties from Type and then removing Keys.
+interface Todo4 {
+  title: string
+  description: string
+  completed: boolean
+}
+
+type TodoPreview2 = Omit<Todo4, 'description'>
+
+const todo5: TodoPreview2 = {
+  title: 'Clean room',
+  completed: false
+}
+
+todo5
+
 export {}
