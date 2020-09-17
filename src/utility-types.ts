@@ -187,4 +187,14 @@ const obj: Props = { a: 5 }
 // Property 'b' is missing in type '{ a: number; }' but required in type 'Required<Props>'.ts(2741)
 // utility-types.ts(181, 3): 'b' is declared here.
 
+// ThisParameterType<Type>
+// Extracts the type of the this parameter for a function type, or unknown if the function type has no this parameter.
+function toHex(this: Number) {
+  return this.toString(16)
+}
+
+function numberToString(n: ThisParameterType<typeof toHex>) {
+  return toHex.apply(n)
+}
+
 export {}
