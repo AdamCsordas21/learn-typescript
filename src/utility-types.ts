@@ -197,4 +197,16 @@ function numberToString(n: ThisParameterType<typeof toHex>) {
   return toHex.apply(n)
 }
 
+// OmitThisParameterType<Type>
+// Removes the this paramater from Type. If Type has no explicity declared this parameter, the result is simply Type.
+// Otherwise, a new function type with no this parameter is created from Type. Genereics are erased and only the last
+// overload signature is propagated into the new function type.
+function toHex2(this: Number) {
+  return this.toString(16)
+}
+
+const fivetoHex: OmitThisParameter<typeof toHex2> = toHex2.bind(5)
+
+console.log(fivetoHex())
+
 export {}
