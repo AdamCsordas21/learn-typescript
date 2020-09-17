@@ -209,4 +209,39 @@ const fivetoHex: OmitThisParameter<typeof toHex2> = toHex2.bind(5)
 
 console.log(fivetoHex())
 
+// ThisType<Type>
+// This utility does not return a transformed type. Instead, it serves as a marker for a contextual this type.
+// Note that the --noImplicitThis flag must be enabled to use this utility.
+type ObjectDescriptor<D, M> = {
+  data?: D
+  methods?: M & ThisType<D & M>
+}
+
+function makeObject<D, M>(desc: ObjectDescriptor<D, M>): D & M {
+  let data: object = desc.data || {}
+  let methods: object = desc.methods || {}
+  return { ...data, ...methods } as D & M
+}
+
+let obj3 = makeObject({
+  data: { x: 0, y: 0 },
+  methods: {
+    moveBy(dx: number, dy: number) {
+      this.x += dx
+      this.y += dy
+    }
+  }
+})
+
+obj3.x = 10
+obj3.y = 20
+obj3.moveBy(5, 5)
+
+// In this example above, the methods object in the argument to makeObject has a contextual type that includes
+// ThisType<D & M> and therefore the type of this in methods within the methods object is { x: number, y: number }
+// & { moveBy(dx: number, dy: number): number }. Notice how the type of the moethods property simultaneously is an
+// inference target and a source for the this type in methods.
+// The ThisType<T> marker interface is simply an emtyp interface declared in lib.d.ts. Beyond being recognised in the
+// contextual type of an object literal, the interface acts like any empty interface.
+
 export {}
