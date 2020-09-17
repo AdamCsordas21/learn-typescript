@@ -174,4 +174,17 @@ type T29 = InstanceType<never>
 // Type 'Function' does not satisfy the constraint 'new (...args: any) => any'.
 // Type 'Function' provides no match for the signature 'new (...args: any): any'.ts(2344)
 
+// Required<Type>
+// Constructs a type consisting of all properties of T set to required. The opposite of Partial.
+interface Props {
+  a?: number
+  b?: string
+}
+
+const obj: Props = { a: 5 }
+
+// const obj2: Required<Props> = { a: 5 }
+// Property 'b' is missing in type '{ a: number; }' but required in type 'Required<Props>'.ts(2741)
+// utility-types.ts(181, 3): 'b' is declared here.
+
 export {}
