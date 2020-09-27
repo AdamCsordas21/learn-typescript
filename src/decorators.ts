@@ -81,7 +81,7 @@ function g() {
 class C {
   @f()
   @g()
-  method() {}
+  method() { }
 }
 // Which would print this output to the console:
 // f(): evaluated
@@ -96,4 +96,58 @@ class C {
 // 3. Parameter Decorators are applied for the constructor.
 // 4. Class Decorators are applied for the class.
 
-export {}
+// Class Decorators
+// A class decorator is declared just before a class declaration. The class decorator is applied to the constructor
+// of the class and can be used to observe, modify, or replace a class definition. A class decorator cannot be used in
+// a declaration file, or in any other ambient context (such as on a declare class).
+
+// The expression for the class decorator will be called as a function at runtime, with the constructor of the
+// decorated class as its only argument.
+
+// If the class decoration return a value, it will replacethe class declaration with the provided constructor function.
+
+// NOTE Should you choose to return a new cinstructor function, you must take care to maintain the original prototype.
+// The logic that applies decorators at runtime will NOT do this for you.
+
+// The following is an example of a class decorator (@sealed) applied to the Greeter class:
+@sealed
+class Greeter {
+  greeting: string
+  constructor(message: string) {
+    this.greeting = message
+  }
+  greet() {
+    return 'Hello, ' + this.greeting
+  }
+}
+
+// We can define the @sealed decorator using the following function declaration:
+function sealed2(constructor: Function) {
+  Object.seal(constructor)
+  Object.seal(constructor.prototype)
+}
+
+// When @sealed is executed, it will seal both the constructor and its prototype.
+
+// Next we have an example of how to override the constructor.
+function classDecorator<T extends { new(...args: any[]): {} }>(
+  constructor: T
+) {
+  return class extends constructor {
+    newProperty = 'new property'
+    hello = 'override'
+  }
+}
+
+@classDecorator
+class Greeter2 {
+  property = 'property'
+  hello: string
+  constructor(m: string) {
+    this.hello = m
+  }
+}
+
+console.log(new Greeter2('world'))
+
+export { }
