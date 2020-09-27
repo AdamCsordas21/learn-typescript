@@ -3,7 +3,8 @@
     "outDir": "./dist",
     "allowJs": true,
     "target": "es2020",
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "experimentalDecorators": true
   },
   "include": ["./src/**/*.ts"]
 }

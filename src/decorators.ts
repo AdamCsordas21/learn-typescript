@@ -35,4 +35,58 @@ function colour(value: string) {
   }
 }
 
+// Decorator Composition
+// Multiple decorators can be applied to a declaration, as in the following examples:
+
+// On a single line:
+// @f @g x
+
+// On multiple lines:
+// @f
+// @g
+// x
+
+// When multiple decorators apply to a single declaration, their evaluation is similar to function composition in
+// mathematics. In this model, when composing functions f and g, the resultin composite (f ∘ g)(x) is equivalent to
+// f(g(x)).
+
+// As such, the following steps are performed when evaluating multiple decorators on a single declaration
+// in TypeScript:
+// 1. The expression for each decorator are evaluated top-to-bottom.
+// 2. The results are then called as function from bottom-to-top.
+
+// If we were to use decorator factories, we can observe this evaluation order with the following example:
+function f() {
+  console.log('f(): evaluated')
+  return function (
+    target,
+    propertyKey: string,
+    descriptor: PropertyDescriptor
+  ) {
+    console.log('f(): called')
+  }
+}
+
+function g() {
+  console.log('g(): evaluated')
+  return function (
+    target,
+    propertyKey: string,
+    descriptor: PropertyDescriptor
+  ) {
+    console.log('g(): called')
+  }
+}
+
+class C {
+  @f()
+  @g()
+  method() {}
+}
+// Which would print this output to the console:
+// f(): evaluated
+// g(): evaluated
+// g(): called
+// f(): called
+
 export {}
