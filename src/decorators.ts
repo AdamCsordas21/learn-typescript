@@ -150,4 +150,46 @@ class Greeter2 {
 
 console.log(new Greeter2('world'))
 
+// Method Decorators
+// A Method Decorator is declared just before a method declaration. The decoratore is applied to the
+// Property Descriptor for the method, and can be used to observe, modify, or replace a method definition. A method
+// decorator cannot be used in a declaration file, on an overload, or in any other ambient context (such as in a
+// declare class).
+
+// The expression for the method decorator will be called as a function at runtime, with the following three
+// arguments:
+// 1. Either the constructor function of the class for a static member, or the prototype of the class for an instance
+// member.
+// 2. The name of the member.
+// 3. The Property Descriptor for the member.
+
+// NOTE The return value is ignored if your script target is less than ES5.
+
+// The following is an example of a method decorator (@anumerable) applied to a method on the Greeter class:
+class Greeter3 {
+  greeting: string
+  constructor(message: string) {
+    this.greeting = message
+  }
+  
+  @enumerable(false)
+  greet() {
+    return 'Hello, ' + this.greeting
+  }
+}
+
+// We can define @enumerable decorator using the following function declaration:
+function enumerable(value: boolean) {
+  return function (
+    target: any,
+    propertyKey: string,
+    descriptor: PropertyDescriptor
+  ) {
+    descriptor.enumerable = value
+  }
+}
+
+// The @enumerable(false) decorator here is a decorator factory. When the @enumerable(false) decorator is called,
+// it modifies the enumerable property of the property descriptor.
+
 export { }
