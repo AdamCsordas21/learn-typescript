@@ -21,4 +21,18 @@ function sealed(target) {
   // do someting with 'target' ...
 }
 
+// Decorator Factories
+
+// If we want to customise how a decorator is applied to a declaration, ew can write a decorator factory. A Decorator
+// Factory is simply a function that return the expression that will be called by the decorator at runtime.
+
+// We can write a decorator factory in the following fashion:
+function colour(value: string) {
+  // this is the decorator factory
+  return function (target) {
+    // this is the decorator
+    // do something with 'target' and 'value'...
+  }
+}
+
 export {}
