@@ -171,7 +171,7 @@ class Greeter3 {
   constructor(message: string) {
     this.greeting = message
   }
-  
+
   @enumerable(false)
   greet() {
     return 'Hello, ' + this.greeting
@@ -191,5 +191,57 @@ function enumerable(value: boolean) {
 
 // The @enumerable(false) decorator here is a decorator factory. When the @enumerable(false) decorator is called,
 // it modifies the enumerable property of the property descriptor.
+
+// Accessor Decorators
+// An Accessor Decorator is declared just before an accessor declaration. The accessor decorator is applied to the
+// Property Descriptor for the accessor and can be used to observe, modify, or replace an accessor's definitions.
+// An accessor decorator cannot be used in a declaration file, or in any other ambient context (such as in a declare
+// class).
+
+// Note - TypeScript disallows decorating both the get and set accessor for a single member. Instead, all decorators
+// for the member must be applied to the first accessor specified in document order. This is because decorators apply,
+// toa Property Descriptor, which combines both the get and set accessor, not each declaration separately.
+
+// The expression for the accessor decorator will be called as a function at runtime, with the following three
+// arguments:
+// 1. Either the constructor function of the class for a static member, or the prototype of the class for an instance
+// member.
+// 2. The name if the member.
+// 3. The Property Descriptor for the member.
+
+// Note - The Property Descriptor will be undefined if your script target is less than ES5.
+
+// If the accessor decorator returns a value, it will be used as the Property Descriptor for the member.
+// Note - The return value is ognored if your script target is less than ES5.
+
+// The following is an example of an accessor decorator (@configurable) applied to a member of the Point class:
+class Point {
+  private _x: number
+  private _y: number
+  constructor(x: number, y: number) {
+    this._x = x
+    this._y = y
+  }
+
+  @configurable(false)
+  get x() {
+    return this._x
+  }
+
+  @configurable(false)
+  get y() {
+    return this._y
+  }
+}
+
+function configurable(value: boolean) {
+  return function (
+    target: any,
+    propertyKey: string,
+    descriptor: PropertyDescriptor
+  ) {
+    descriptor.configurable = value
+  }
+}
 
 export { }
