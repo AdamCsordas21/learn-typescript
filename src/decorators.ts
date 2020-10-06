@@ -244,4 +244,47 @@ function configurable(value: boolean) {
   }
 }
 
+// Property Decorators
+// A Property Decorator is declared just before a property declaration. A property decorator cannot be used in a 
+// declaration file, or in any other ambient context (such as in a declare class).
+
+// The expression for the property decorator will be called as a function at runtime, with the following two
+// arguments:
+// 1. Either the constructor function of the class for a static member, or the prototype of the class for an instance
+// member.
+// 2. The name of the member.
+
+// Note - A Property Descriptor is not provided as an argument to a property decorator due to how property decorators
+// are initialised in TypeScript. This is because there is currently no mechanism to describe an instance property
+// when defining members of a prototype, and no way to observe or modify the initialiser for a property. The return
+// value is ignored too. As such, a property decorator can only be used to observe that a property of a specific name
+// has been declared for a class.
+
+// We can use this information to record metadata about the property, as in the following example:
+// class Greeter4 {
+//   @format('Hello, %s')
+//   greeting: string
+  
+//   constructor(message: string) {
+//     this.greeting = message
+//   }
+//   greet() {
+//     let formatString = getFormat(this, 'greeting')
+//     return formatString.replace('%s', this.greeting)
+//   }
+// }
+
+// // We can then define the @format decorator and getFormat functions using the folloeing function declarations:
+// import 'reflect-metadata'
+
+// const formatMetadataKey = Symbol('format')
+
+// function format(formatString: string) {
+//   return Reflect.metadata(formatMetadataKey, formatString)
+// }
+
+// function getFormat(target: any, propertyKey: string) {
+//   return Reflect.getMetadata(formatMetadataKey, target, propertyKey)
+// }
+
 export { }
